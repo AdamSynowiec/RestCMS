@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+    <style>
+        .apiUrl,
+        .x-scroll {
+            overflow-x: scroll
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: 0 0
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #eee;
+            border-radius: 10px
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ccc
+        }
+
+        .apiUrl {
+            width: 100%;
+            text-wrap: nowrap;
+            padding: 5px 0
+        }
+    </style>
+
+    <title>REST API Documentation</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-light bg-dark p-3 d-flex justify-content-between align-items-center">
+                <span>REST API Documentation</span>
+                <span>v1.0.0</span>
+            </div>
+            <div class="col-12 border bg-light p-3">
+                <span>Basic API information</span>
+                <span>API Base URL <span class="text-primary">https://restcms.ct8.pl</span></span>
+            </div>
+            <div class="col-12 text-light bg-dark p-3">
+                <span>Installation</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-success mb-2">GET</button>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/setup?auth={$secret_key}</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span>Initial Installation</span>
+                <ul>
+                    <li>Authorization by Key: <b>admin_setup</b></li>
+                </ul>
+                <span>Subsequent Instances</span>
+                <ul>
+                    <li>Authorization by a key that is generated within the <b>auth</b> table</li>
+                </ul>
+            </div>
+            <div class="col-12 text-light bg-dark p-3">
+                <span>Authorization</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-success mb-2">GET</button>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl?auth={$secret_key}</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+            <div class="col-12 text-light bg-dark p-3">
+                <span>Table operations</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-success mb-2">GET</button>
+                <span class="d-block">Pobieranie listy utworzonych tabeli</span>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/get/table</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-warning mb-2">POST</button>
+                <span class="d-block">Tworzenie nowej tabeli</span>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/post/table</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Body:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "table":"tableName"
+ } 
+</pre>
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-danger mb-2">DELETE</button>
+                <span class="d-block">Deleting an existing table</span>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/delete/table</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Body:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "table":"tableName"
+ }   
+</pre>
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+            <div class="col-12 text-light bg-dark p-3">
+                <span>Attribute operations</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-warning mb-2">POST</button>
+                <span class="d-block">Create a new attribute in a table</span>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/post/attribute</span>
+                <div class="x-scroll">
+                    <table class="table table-striped table-dark table-bordered my-3" width="100%">
+                        <tr>
+                            <td>Object key</td>
+                            <td>Required</td>
+                            <td>Object value</td>
+                            <td>Description</td>
+                        </tr>
+                        <tr>
+                            <td>type</td>
+                            <td>Yes</td>
+                            <td>
+                                <ul>
+                                    <li>Number</li>
+                                    <li>String</li>
+                                    <li>Text</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span>Type of object represented</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>Yes</td>
+                            <td>
+                                <ul>
+                                    <li>String</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span>Name of the represented object</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Data:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "table": "tableName",
+    "attribute": {
+        "type": "number",
+        "name": "name"
+    }
+ } 
+</pre>
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-danger mb-2">DELETE</button>
+                <span class="d-block">Deleting an existing attribute from the table</span>
+                <span
+                    class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/delete/attribute/{$table}/delete?data={object_data}
+                </span>
+                <div class="x-scroll">
+                    <table class="table table-striped table-dark table-bordered my-3" width="100%">
+                        <tr>
+                            <td>Object key</td>
+                            <td>Required</td>
+                            <td>Object value</td>
+                            <td>Description</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>Yes</td>
+                            <td>
+                                <ul>
+                                    <li>String</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span>Name of the represented object</span>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Data:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "type": "number",
+    "name": "name"
+ }   
+</pre>
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+
+            <div class="col-12 text-light bg-dark p-3">
+                <span>Data operations</span>
+            </div>
+
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-success mb-2">GET</button>
+                <span class="d-block">Data collection</span>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/get/data/{$table}</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-danger mb-2">DELETE</button>
+                <span class="d-block">Data deletion</span>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/delete/data/{$table}</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-success mb-2">GET</button>
+                <span class="d-block">Downloading data with a concurrent ID</span>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/get/data/{$table}/{$id}</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <button type="button" class="btn btn-danger mb-2">DELETE</button>
+                <span class="d-block">Deleting data with a concurrent ID</span>
+                <span class="d-block text-primary apiUrl">https://restcms.ct8.pl/api/delete/data/{$table}/{$id}</span>
+            </div>
+            <div class="col-12 col-md-6 border bg-light p-3">
+                <span class="d-block pb-3">Response:</span>
+                <pre class="bg-dark text-light py-3">
+ {
+    "status": 200,
+    "message": "success"
+ }   
+</pre>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
